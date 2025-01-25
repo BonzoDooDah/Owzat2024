@@ -46,6 +46,7 @@ const dBplayers = [
     { id: "P0000022", forename: "Kuldeep", surname: "Yadav", nation: "IND", bat: "45", bowl: "87", field: "80" }
 ];
 
+// function to get playert data using the player id
 function BfxGetPlayerData(id) {
     for (let index = 0; index < dBplayers.length; index++) {
         const element = dBplayers[index];
@@ -54,6 +55,7 @@ function BfxGetPlayerData(id) {
     return null;
 }
 
+// function to get a random number between 0 and (max-1)
 function BfxRandomInt(max) {
     return Math.floor(Math.random() * max);
 }

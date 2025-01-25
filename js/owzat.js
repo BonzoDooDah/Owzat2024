@@ -4,7 +4,9 @@ var ballCounter = 0;
 const inningsRecord = [new TeamInningsRecord(), new TeamInningsRecord()];
 var idBattingTeam = BfxRandomInt(2);
 var idBowlingTeam = Math.abs(idBattingTeam - 1);
+const bowlingPair = [0, 0];
 var idBowler = BfxRandomInt(2);
+const battingPair = [0, 0];
 var idBatsman = BfxRandomInt(2);
 
 function initialise() {
@@ -32,6 +34,12 @@ function initialise() {
     inningsRecord[0].initialise(teams[0]);
     inningsRecord[1].initialise(teams[1]);
     console.log(inningsRecord);
+
+    bowlingPair[0] = inningsRecord[idBowlingTeam].team.bowlingStarters[0];
+    bowlingPair[1] = inningsRecord[idBowlingTeam].team.bowlingStarters[1];
+
+    battingPair[0] = inningsRecord[idBattingTeam].team.battingOrder[0];
+    battingPair[1] = inningsRecord[idBattingTeam].team.battingOrder[1];
 
     BfxStartMatch();
 }
@@ -110,6 +118,5 @@ function BfxCheckOver() {
     if ((ballCounter % 6) == 0) {
         idBowler = Math.abs(idBowler - 1);
         idBatsman = Math.abs(idBatsman - 1);
-        console.log(idBowler, idBatsman);
     }
 }
