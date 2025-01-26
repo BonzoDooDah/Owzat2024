@@ -13,6 +13,7 @@ class OwzatInningsRecord { //==================================================
     #currentBowler = 0;
 
     #ballCounter = 0;
+    #scoreRuns = 0;
 
     constructor(battingTeam, bowlingTeam) {
         if ((battingTeam == undefined) || (bowlingTeam == undefined)) return;
@@ -46,44 +47,48 @@ class OwzatInningsRecord { //==================================================
 
     get teamNameAtBat() { return this.#teamBatName; }
     get teamNameAtBowl() { return this.#teamBowlName; }
-    get playerNameAtBat() { return this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[this.#currentBatter]]].name; }
-    get playerNameAtBowl() { return this.#teamBowl[this.#teamBowlOrder[this.#currentBowlingPair[this.#currentBowler]]].name; }
+    get #currentBatterPlayerRecord() { return this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[this.#currentBatter]]]; }
+    get #currentBowlerPlayerRecord() { return this.#teamBowl[this.#teamBowlOrder[this.#currentBowlingPair[this.#currentBowler]]]; }
+
+    get playerNameAtBat() { return this.#currentBatterPlayerRecord.name; }
+    get playerNameAtBowl() { return this.#currentBowlerPlayerRecord.name; }
     get overCount() { return Math.trunc(this.#ballCounter / 6) + 1; }
     get overBall() { return (this.#ballCounter % 6) + 1; }
+    get scoreRuns() { return this.#scoreRuns; }
 
     ProcessBowl() {
         let runsScored = 0;
-        let bowlerScore = this.#teamBowl[this.#teamBowlOrder[this.#currentBowlingPair[this.#currentBowler]]].bowl;
-        let batterScore = this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[this.#currentBatter]]].bat;
+        let bowlerScore = this.#currentBowlerPlayerRecord.bowl;
+        let batterScore = this.#currentBatterPlayerRecord.bat;
 
         if (BfxRandomInt(100) < bowlerScore) {
             // succesful bowl...
             if (BfxRandomInt(100) < batterScore) {
                 // successful bat...
                 // console.log(bowlerScore.toString() + " Successful bowl, " + batterScore.toString() + " Successful bat.");
-                let batResult = BfxRandomInt(5) - 2;
-                if (batResult < 0) batResult = 0; // makes batResult either 0, 1 or 2 with a higher chance of 0
 
-                console.log(batResult);
-                if (BfxRandomInt(bowlerScore) < BfxRandomInt(batterScore)) {
-                    if (batResult == 2) {
-                        batResult = (BfxRandomInt(2) == 1) ? 6 : 4;
-                    } else {
-                        batResult *= BfxRandomInt(4);
-                    }
-                }
+                runsScored = this.#ProcessScoreRuns();
 
-                runsScored = batResult;
-
-                if ((runsScored % 2) == 1) { this.#currentBatter = Math.abs(this.#currentBatter - 1); }
             } else {
                 // unsuccessful bat...
                 // console.log(bowlerScore.toString() + " Successful bowl, " + batterScore.toString() + " Unsuccessful bat.");
+
+                runsScored = 0;
+                
             }
         } else {
             // unsuccessful bowl...
             // console.log(bowlerScore.toString() + " Unsuccessful bowl.");
+        
+            runsScored = this.#ProcessScoreRuns();
+
         }
+
+        if ((runsScored % 2) == 1) { this.#currentBatter = Math.abs(this.#currentBatter - 1); }
+
+        this.#scoreRuns += runsScored;
+        this.#currentBowlerPlayerRecord.AddBall(runsScored);
+        this.#currentBatterPlayerRecord.AddBall(runsScored, "not out");
 
         // after processing the bowl
         this.#ballCounter++;
@@ -92,6 +97,19 @@ class OwzatInningsRecord { //==================================================
             this.#currentBatter = Math.abs(this.#currentBatter - 1);
         }
         return { runs: runsScored, wicket: false };
+    }
+
+    #ProcessScoreRuns() {
+        let batResult = BfxRandomInt(5) - 2;
+        if (batResult < 0) batResult = 0; // makes batResult either 0, 1 or 2 with a higher chance of 0
+
+        if (batResult == 2) {
+            batResult = (BfxRandomInt(2) == 1) ? 6 : 4;
+        } else {
+            batResult *= BfxRandomInt(4);
+        }
+
+        return batResult;
     }
 }
 

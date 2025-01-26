@@ -52,6 +52,17 @@ function bowlBall() { //=======================================================
     msg.innerHTML = htmMessage;
     // add message to message box
     uiMessageBox.insertAdjacentElement("afterbegin", msg);
+
+    if (ozInnings.overBall == 1) {
+        let msgNewOver = document.createElement("div");
+        msgNewOver.style.padding = "1px 5px";
+        msgNewOver.style.borderBottomWidth = "1px";
+        msgNewOver.style.borderBottomStyle = "solid";
+        msgNewOver.style.borderBottomColor = "rgba(0,0,0,1)";
+        msgNewOver.style.backgroundColor = "rgba(0,0,0,0.2)";
+        msgNewOver.innerHTML = "<i>End of over " + (ozInnings.overCount - 1) + "</i>. Score is <b>" + ozInnings.scoreRuns + "</b>." ;
+        uiMessageBox.insertAdjacentElement("afterbegin", msgNewOver);
+    }
 }
 
 function bowlOver() { //=======================================================
