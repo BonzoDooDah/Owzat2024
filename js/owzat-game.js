@@ -1,3 +1,7 @@
+
+const boxBatsman = document.createElement("div");
+const boxBowler = document.createElement("div");
+const uiGameBox = OwzatUI_CreateGameBox();
 const uiMessageBox = OwzatUI_CreateMessageBox();
 
 const cmdBowlBall = OwzatUI_CreateButton({ caption: "Bowl Ball", func: bowlBall });
@@ -19,6 +23,9 @@ function initialise() { //=====================================================
     document.body.appendChild(cmdBar);
 
     // create ui message box
+    document.body.appendChild(uiGameBox);
+
+    // create ui message box
     document.body.appendChild(uiMessageBox);
 
     let msg = document.createElement("div");
@@ -29,53 +36,39 @@ function initialise() { //=====================================================
     msg.style.backgroundColor = "rgba(0,0,0,0.2)";
     msg.innerHTML = "<b>" + ozInnings.teamNameAtBat + "</b> bat first.";
     uiMessageBox.insertAdjacentElement("afterbegin", msg);
+
+    updateBatsman();
+    updateBowler();
 }
 
 function bowlBall() { //=======================================================
-    // create message
-    let htmMessage = "<i>" + ozInnings.overCount + "." + ozInnings.overBall + "</i> : ";
-    htmMessage += "<b>" + ozInnings.playerNameAtBowl + "</b> bowls to ";
-    htmMessage += "<b>" + ozInnings.playerNameAtBat + "</b>... ";
-
-    // create message container
-    let msg = document.createElement("div");
-    msg.style.padding = "1px 5px";
-    msg.style.borderBottomWidth = "1px";
-    msg.style.borderBottomStyle = (ozInnings.overBall == 1) ? "solid" : "dotted";
-    msg.style.borderBottomColor = (ozInnings.overBall == 1) ? "rgba(0,0,0,1)" : "rgba(0,0,0,0.2)";
-
-    let result = ozInnings.ProcessBowl() // BOWL THE BALL
-
-    htmMessage += (result.runs == 0) ? "no runs were scored." : "and scores <b>" + result.runs + "</b>.";
-
-    // set message in container
-    msg.innerHTML = htmMessage;
-    // add message to message box
-    uiMessageBox.insertAdjacentElement("afterbegin", msg);
-
-    if (ozInnings.overBall == 1) {
-        let msgNewOver = document.createElement("div");
-        msgNewOver.style.padding = "1px 5px";
-        msgNewOver.style.borderBottomWidth = "1px";
-        msgNewOver.style.borderBottomStyle = "solid";
-        msgNewOver.style.borderBottomColor = "rgba(0,0,0,1)";
-        msgNewOver.style.backgroundColor = "rgba(0,0,0,0.2)";
-        msgNewOver.innerHTML = "<i>End of over " + (ozInnings.overCount - 1) + "</i>. Score is <b>" + ozInnings.scoreRuns + "</b>." ;
-        uiMessageBox.insertAdjacentElement("afterbegin", msgNewOver);
-    }
+    let result = ozInnings.ProcessBowl();
+    console.log(result);
 }
 
 function bowlOver() { //=======================================================
-    // const ballsToCompleteOver = ozInnings.ballsLeftInOver;
-    // for (let counter = 0; counter < ballsToCompleteOver; counter++) {
-    //     console.log(counter, ozInnings.ballsLeftInOver);
-    //     bowlBall()
-    // }
-    console.log("Bowl Over to be implemented.");
+      for (let counter = ozInnings.overBall; counter <= 6; counter++) {
+        bowlBall()
+    }
+    // console.log("Bowl Over to be implemented.");
 }
 
 function viewScorecard() { //==================================================
     console.log("View Scorecard to be implemented.");
+}
+
+function updateBatsman() {
+    // create message
+    let htmMessage = "<b>" + ozInnings.playerNameAtBat + "</b>... ";
+
+    boxBatsman.innerHTML = htmMessage
+}
+
+function updateBowler() {
+    // create message
+    let htmMessage = "<b>" + ozInnings.playerNameAtBowl + "</b>... ";
+
+    boxBowler.innerHTML = htmMessage
 }
 
 // HTML Element creation functions ////////////////////////////////////////////
@@ -107,6 +100,29 @@ function OwzatUI_CreateMessageBox() { //=======================================
     box.style.overflowY = 'auto';
     box.style.borderTop = "solid 1px black";
     box.style.height = '500px';
+
+    return box;
+}
+
+function OwzatUI_CreateGameBox() {
+    // create div element
+    let box = document.createElement("div");
+
+    // set required div style
+    box.style.margin = "5px 0";
+    box.style.borderTop = "solid 1px black";
+
+    boxBatsman.style.margin = "5px";
+    boxBatsman.style.padding = "5px";
+    boxBatsman.style.border = "solid 1px black";
+    boxBatsman.innerHTML = "BATSMAN_1";
+    box.appendChild(boxBatsman);
+
+    boxBowler.style.margin = "5px";
+    boxBowler.style.padding = "5px";
+    boxBowler.style.border = "solid 1px black";
+    boxBowler.innerHTML = "BOWLER";
+    box.appendChild(boxBowler);
 
     return box;
 }
