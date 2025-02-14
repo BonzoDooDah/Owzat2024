@@ -35,14 +35,7 @@ class OwzatOverRecord { //======================================================
     bowlBall() {
         // check for end of over error
         if (this.#balls.length == 6) {
-            throw new Error(
-                'OZERR-EOO',
-                {
-                    cause: {
-                        description: 'End of Over.',
-                        batsmanOnStrike: Math.abs(this.#batsmanOnStrike - 1)
-                    }
-                });
+            throw new Error('OZERR-EOO', { cause: { description: 'End of Over.', } });
         }
 
         // calculate runs scored
@@ -72,31 +65,3 @@ class OwzatOverRecord { //======================================================
         return ball;
     }
 }
-
-// let over = new OwzatOverRecord(
-//     new OwzatPlayerRecordBowling(BfxGetPlayerData('P0000001')),
-//     new OwzatPlayerRecordBatting(BfxGetPlayerData('P0000017')),
-//     new OwzatPlayerRecordBatting(BfxGetPlayerData('P0000020')),
-//     0
-// );
-
-// for (let index = 0; index < 18; index++) {
-//     try {
-//         over.bowlBall();
-//     } catch (error) {
-//         switch (error.message) {
-//             case 'OZERR-EOO':
-//                 over = new OwzatOverRecord(
-//                     new OwzatPlayerRecordBowling(BfxGetPlayerData('P0000002')),
-//                     new OwzatPlayerRecordBatting(BfxGetPlayerData('P0000017')),
-//                     new OwzatPlayerRecordBatting(BfxGetPlayerData('P0000020')),
-//                     error.cause.batsmanOnStrike
-//                 );
-//                 over.bowlBall();
-//                 break;
-
-//             default:
-//                 break;
-//         }
-//     }
-// }

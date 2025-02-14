@@ -44,7 +44,7 @@ class OwzatInningsRecord { //==================================================
         this.#teamBowlOrder = bowlingTeam.bowlingStarters;
         // initialise overs
         this.#overs = new Array();
-        this.#newOver();
+        this.#newOver(true);
     }
 
     get teamNameAtBat() { return this.#teamBatName; }
@@ -54,8 +54,16 @@ class OwzatInningsRecord { //==================================================
 
     get playerNameAtBat() { return this.#currentBatterPlayerRecord.name; }
     get playerNameAtBowl() { return this.#currentBowlerPlayerRecord.name; }
+    get playerDetailsAtBat() { return ' : ' + this.#currentBatterPlayerRecord.runs + ' runs, ' + this.#currentBatterPlayerRecord.balls + ' balls.'; }
+    get playerDetailsAtBowl() { return ' : ' + this.#currentBowlerPlayerRecord.runs + ' runs, ' + this.#currentBowlerPlayerRecord.balls + ' balls, for ' + this.#currentBowlerPlayerRecord.wickets + ' wickets.'; }
 
-    #newOver() {
+    get OverBallsRemaining() { return (6 - this.#currentOver.ballCount); }
+
+    #newOver(firstOver = false) {
+        if (!firstOver) {
+            this.#currentBowler = Math.abs(this.#currentBowler - 1);
+            this.#currentBatter = Math.abs(this.#currentBatter - 1);
+        }
         this.#currentOver = new OwzatOverRecord(
             this.#currentBowlerPlayerRecord,
             this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[0]]],
@@ -66,14 +74,14 @@ class OwzatInningsRecord { //==================================================
 
     ProcessBowl() {
         let result = null;
+        let strBowl = '';
+        let strResult = '';
 
         try {
             result = this.#currentOver.bowlBall();
         } catch (error) {
             switch (error.message) {
                 case 'OZERR-EOO':
-                    this.#currentBowler = Math.abs(this.#currentBowler - 1);
-                    this.#currentBatter = error.cause.batsmanOnStrike;
                     this.#newOver();
                     result = this.#currentOver.bowlBall();
                     break;
@@ -81,8 +89,17 @@ class OwzatInningsRecord { //==================================================
                 default:
                     break;
             }
-        }
+        } finally {
+            strBowl = '<b>' + BfxGetPlayerData(result.idBowler).surname + '</b> bowls to <b>' + BfxGetPlayerData(result.idBatsman).surname + '</b>... ';
+            strResult = ' ' + result.score + ' runs scored.';
 
-        return result;
+            if (result.score % 2 == 1) { this.#currentBatter = Math.abs(this.#currentBatter - 1); }
+
+            if (this.#currentOver.ballCount == 6) { this.#newOver(); }
+        }
+        //// START DEBUG BIT ////
+        console.log(result);
+        ///// END DEBUG BIT /////
+        return { msgBowl: strBowl, msgResult: strResult };
     }
 }
