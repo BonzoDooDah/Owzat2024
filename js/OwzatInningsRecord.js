@@ -53,11 +53,30 @@ class OwzatInningsRecord { //==================================================
     get #currentBowlerPlayerRecord() { return this.#teamBowl[this.#teamBowlOrder[this.#currentBowlingPair[this.#currentBowler]]]; }
 
     get playerNameAtBat() { return this.#currentBatterPlayerRecord.name; }
+    get playerNameAtBat2() { return this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[Math.abs(this.#currentBatter - 1)]]].name; }
     get playerNameAtBowl() { return this.#currentBowlerPlayerRecord.name; }
     get playerDetailsAtBat() { return ' : ' + this.#currentBatterPlayerRecord.runs + ' runs, ' + this.#currentBatterPlayerRecord.balls + ' balls.'; }
+    get playerDetailsAtBat2() { return ' : ' + this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[Math.abs(this.#currentBatter - 1)]]].runs + ' runs, ' + this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[Math.abs(this.#currentBatter - 1)]]].balls + ' balls.'; }
     get playerDetailsAtBowl() { return ' : ' + this.#currentBowlerPlayerRecord.runs + ' runs, ' + this.#currentBowlerPlayerRecord.balls + ' balls, for ' + this.#currentBowlerPlayerRecord.wickets + ' wickets.'; }
 
     get OverBallsRemaining() { return (6 - this.#currentOver.ballCount); }
+    get Overs() { return this.#overs.length + ((this.#currentOver.ballCount + 1) / 10); }
+
+    getPlayerBatFromId(id) {
+        for (let index = 0; index < this.#teamBat.length; index++) {
+            const element = this.#teamBat[index];
+            if (element.id == id) return element;
+        }
+        return null;
+    }
+
+    getPlayerBowlFromId(id) {
+        for (let index = 0; index < this.#teamBowl.length; index++) {
+            const element = this.#teamBowl[index];
+            if (element.id == id) return element;
+        }
+        return null;
+    }
 
     #newOver(firstOver = false) {
         if (!firstOver) {
@@ -65,23 +84,20 @@ class OwzatInningsRecord { //==================================================
             this.#currentBatter = Math.abs(this.#currentBatter - 1);
         }
         this.#currentOver = new OwzatOverRecord(
-            this.#currentBowlerPlayerRecord,
-            this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[0]]],
-            this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[1]]],
+            this.#teamBowl[this.#teamBowlOrder[this.#currentBowlingPair[this.#currentBowler]]],
+            [this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[0]]], this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[1]]]],
             this.#currentBatter)
         this.#overs.push(this.#currentOver);
     }
 
     ProcessBowl() {
         let result = null;
-        let strBowl = '';
-        let strResult = '';
 
         try {
             result = this.#currentOver.bowlBall();
         } catch (error) {
             switch (error.message) {
-                case 'OZERR-EOO':
+                case 'OZERR106':
                     this.#newOver();
                     result = this.#currentOver.bowlBall();
                     break;
@@ -90,16 +106,13 @@ class OwzatInningsRecord { //==================================================
                     break;
             }
         } finally {
-            strBowl = '<b>' + BfxGetPlayerData(result.idBowler).surname + '</b> bowls to <b>' + BfxGetPlayerData(result.idBatsman).surname + '</b>... ';
-            strResult = ' ' + result.score + ' runs scored.';
-
-            if (result.score % 2 == 1) { this.#currentBatter = Math.abs(this.#currentBatter - 1); }
+            this.#currentBatter = result.nextBatsman;
 
             if (this.#currentOver.ballCount == 6) { this.#newOver(); }
         }
         //// START DEBUG BIT ////
         console.log(result);
         ///// END DEBUG BIT /////
-        return { msgBowl: strBowl, msgResult: strResult };
+        return result;
     }
 }

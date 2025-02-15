@@ -1,5 +1,6 @@
 
-const boxBatsman = document.createElement('div');
+const boxBatsman1 = document.createElement('div');
+const boxBatsman2 = document.createElement('div');
 const boxBowler = document.createElement('div');
 const uiGameBox = OwzatUI_CreateGameBox();
 const uiMessageBox = OwzatUI_CreateMessageBox();
@@ -34,16 +35,16 @@ function initialise() { //=====================================================
     msg.innerHTML = '<b>' + ozInnings.teamNameAtBat + '</b> bat first.';
     uiMessageBox.insertAdjacentElement('afterbegin', msg);
 
-    updateBatsman();
-    updateBowler();
+    updateUI();
 }
 
 function bowlBall(repeat = 1) { //=======================================================
+    let strOvers = '' + ozInnings.Overs + ' : ';
     let result = ozInnings.ProcessBowl();
 
     let msg = OwzatUI_CreateMessage();
     if (ozInnings.OverBallsRemaining == 5) { msg.style.borderBottom = '1px solid black'; }
-    msg.innerHTML = result.msgBowl;
+    msg.innerHTML = strOvers + ozInnings.getPlayerBowlFromId(result.idBowler).name + ' bowls to ' + ozInnings.getPlayerBatFromId(result.idBatsman).name + '... ';
     uiMessageBox.insertAdjacentElement('afterbegin', msg);
 
     cmdBowlBall.disabled = true;
@@ -52,8 +53,7 @@ function bowlBall(repeat = 1) { //==============================================
     setTimeout(
         function (msg, strResult, again) {
             msg.innerHTML += strResult;
-            updateBatsman();
-            updateBowler();
+            updateUI();
 
             if (again > 0) {
                 setTimeout(
@@ -72,7 +72,7 @@ function bowlBall(repeat = 1) { //==============================================
                     uiMessageBox.insertAdjacentElement('afterbegin', eooMsg);
                 }
             }
-        }, 1000, msg, result.msgResult, (repeat - 1))
+        }, 1000, msg, result.score + ' runs scored.', (repeat - 1))
 }
 
 function bowlOver() { //=======================================================
@@ -83,17 +83,14 @@ function viewScorecard() { //==================================================
     console.log('View Scorecard to be implemented.');
 }
 
-function updateBatsman() {
-    // create message
+function updateUI() {
     let htmMessage = '<b>' + ozInnings.playerNameAtBat + '</b> ' + ozInnings.playerDetailsAtBat;
-
-    boxBatsman.innerHTML = htmMessage
-}
-
-function updateBowler() {
-    // create message
-    let htmMessage = '<b>' + ozInnings.playerNameAtBowl + '</b> ' + ozInnings.playerDetailsAtBowl;
-
+    boxBatsman1.innerHTML = htmMessage
+    
+    htmMessage = '<b>' + ozInnings.playerNameAtBat2 + '</b> ' + ozInnings.playerDetailsAtBat2;
+    boxBatsman2.innerHTML = htmMessage
+    
+    htmMessage = '<b>' + ozInnings.playerNameAtBowl + '</b> ' + ozInnings.playerDetailsAtBowl;
     boxBowler.innerHTML = htmMessage
 }
 
@@ -149,16 +146,30 @@ function OwzatUI_CreateGameBox() {
     // set required div style
     box.style.margin = '5px 0';
     box.style.borderTop = 'solid 1px black';
+    box.style.height = '115px';
 
-    boxBatsman.style.margin = '5px';
-    boxBatsman.style.padding = '5px';
-    boxBatsman.style.border = 'solid 1px black';
-    boxBatsman.innerHTML = 'BATSMAN_1';
-    box.appendChild(boxBatsman);
+    boxBatsman1.style.margin = '5px';
+    boxBatsman1.style.padding = '5px';
+    boxBatsman1.style.border = 'solid 1px black';
+    boxBatsman1.style.width = '75%';
+    boxBatsman1.style.float = 'left';
+    boxBatsman1.innerHTML = 'BATSMAN_1';
+    box.appendChild(boxBatsman1);
+
+    boxBatsman2.style.margin = '5px';
+    boxBatsman2.style.padding = '5px';
+    boxBatsman2.style.border = 'solid 1px black';
+    boxBatsman2.style.width = '75%';
+    boxBatsman2.style.float = 'left';
+    boxBatsman2.style.color = 'lightgrey';
+    boxBatsman2.innerHTML = 'BATSMAN_2';
+    box.appendChild(boxBatsman2);
 
     boxBowler.style.margin = '5px';
     boxBowler.style.padding = '5px';
     boxBowler.style.border = 'solid 1px black';
+    boxBowler.style.width = '75%';
+    boxBowler.style.float = 'right';
     boxBowler.innerHTML = 'BOWLER';
     box.appendChild(boxBowler);
 
