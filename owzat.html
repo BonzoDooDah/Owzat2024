@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/owzat.css">
+    <title>Owzat2024</title>
+</head>
+
+<body>
+    <div id="divPage">
+        <div style="text-align: center;">
+            <h1>Owzat2024</h1>
+        </div>
+        <div id="divButtons">
+            <button id="btnBowlBall" type="button">Bowl Ball</button>
+            <button id="btnBowlOver" type="button">Bowl Over</button>
+            <button id="btnViewScorecard" type="button" disabled>View Scorecard</button>
+        </div>
+        <div id="divContent">
+            <div id="divPitch">
+                <div id="divPitchBatting">
+                    <div id="divPitchBatsman1" class="onstrike">
+                        <div>Batsman 1</div>
+                        <div style="text-align: right;">0 runs from 0 balls</div>
+                    </div>
+                    <div id="divPitchBatsman2" class="offstrike">
+                        <div>Batsman 2</div>
+                        <div style="text-align: right;">0 runs from 0 balls</div>
+                    </div>
+                </div>
+                <div id="divPitchBowling">
+                    <div id="divPitchBowler1" class="onstrike">
+                        <div>Bowler 1</div>
+                        <div style="text-align: right;">0 runs from 0 balls</div>
+                    </div>
+                    <div id="divPitchBowler2" class="offstrike">
+                        <div>Bowler 2</div>
+                        <div style="text-align: right;">0 runs from 0 balls</div>
+                        <button id="btnChangeBowler" type="button" disabled>Change Bowler</button>
+                    </div>
+                </div>
+            </div>
+            <div id="divMessageBoard">
+                <div id="divMessageScore">
+                    <b>Home Team</b> 1st Innings : <b>0</b> for <b>0</b> of <b>0.0  </b> overs
+                </div>
+                <div id="divMessages">Messages</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/BfxUtils.js"></script>
+    <script src="src/OwzatPlayerRecords.js"></script>
+    <script src="src/OwzatOverRecord.js"></script>
+    <script src="src/OwzatInningsRecord.js"></script>
+</body>
+
+</html>

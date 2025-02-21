@@ -1,0 +1,97 @@
+html,
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10pt;
+}
+
+button {
+    font: inherit;
+}
+
+#divPage {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+#divButtons {
+    padding: 5px 0 5px 0;
+    width: 100%;
+}
+
+#divButtons>button:first-child {
+    margin-left: 5px;
+}
+
+#divButtons>button:last-child {
+    margin-right: 5px;
+    float: right;
+}
+
+#divContent {
+    width: 100%;
+}
+
+#divContent>div {
+    display: inline-block;
+    width: 50%;
+}
+
+#divContent>div:last-child {
+    float: right;
+}
+
+#divPitch>div>div {
+    display: inline-block;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    margin: 2px;
+    padding: 3px 5px;
+    width: calc(50% - 16px);
+}
+
+#divPitch>div>div:last-child {
+    float: right;
+}
+
+#divMessageBoard>div{
+    display: inline-block;
+    margin: 2px;
+    padding: 3px 5px;
+    width: calc(100% - 16px);
+}
+
+#divMessageScore {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+#divMessages {
+    height: calc-size(auto, min(size + 20px, 300px));
+    overflow-y: scroll;
+}
+
+#btnChangeBowler {
+    float: right;
+    margin-top: 10px;
+    font-size: 80%;
+}
+
+.onstrike {
+    background-color: rgba(183, 255, 117, 0.4);
+    border-color: rgb(20, 41, 0);
+    color: rgb(20, 41, 0);
+}
+
+.onstrike>div:first-child {
+    font-weight: bold;
+}
+
+.offstrike {
+    border-color: rgb(128, 128, 128);
+    color: rgb(128, 128, 128);
+    font-weight: normal;
+}

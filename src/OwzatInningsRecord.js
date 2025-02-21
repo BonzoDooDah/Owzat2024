@@ -47,20 +47,33 @@ class OwzatInningsRecord { //==================================================
         this.#newOver(true);
     }
 
-    get teamNameAtBat() { return this.#teamBatName; }
-    get teamNameAtBowl() { return this.#teamBowlName; }
-    get #currentBatterPlayerRecord() { return this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[this.#currentBatter]]]; }
-    get #currentBowlerPlayerRecord() { return this.#teamBowl[this.#teamBowlOrder[this.#currentBowlingPair[this.#currentBowler]]]; }
+    get teamBatName() { return this.#teamBatName; }
+    get teamBowlName() { return this.#teamBowlName; }
 
-    get playerNameAtBat() { return this.#currentBatterPlayerRecord.name; }
-    get playerNameAtBat2() { return this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[Math.abs(this.#currentBatter - 1)]]].name; }
-    get playerNameAtBowl() { return this.#currentBowlerPlayerRecord.name; }
-    get playerDetailsAtBat() { return ' : ' + this.#currentBatterPlayerRecord.runs + ' runs, ' + this.#currentBatterPlayerRecord.balls + ' balls.'; }
-    get playerDetailsAtBat2() { return ' : ' + this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[Math.abs(this.#currentBatter - 1)]]].runs + ' runs, ' + this.#teamBat[this.#teamBatOrder[this.#currentBattingPair[Math.abs(this.#currentBatter - 1)]]].balls + ' balls.'; }
-    get playerDetailsAtBowl() { return ' : ' + this.#currentBowlerPlayerRecord.runs + ' runs, ' + this.#currentBowlerPlayerRecord.balls + ' balls, for ' + this.#currentBowlerPlayerRecord.wickets + ' wickets.'; }
+    get data() { return { 
+        batsman1: this.#teamBat[this.#currentBattingPair[0]].id, 
+        batsman2: this.#teamBat[this.#currentBattingPair[1]].id, 
+        bowler1: this.#teamBowl[this.#currentBowlingPair[0]].id, 
+        bowler2: this.#teamBowl[this.#currentBowlingPair[1]].id 
+    }; }
 
-    get OverBallsRemaining() { return (6 - this.#currentOver.ballCount); }
-    get Overs() { return this.#overs.length + ((this.#currentOver.ballCount + 1) / 10); }
+    get scoreRuns() {
+        let runs = 0;
+        for (let index = 0; index < this.#overs.length; index++) {
+            const element = this.#overs[index];
+            runs += element.runCount;
+        }
+        return runs;
+    }
+
+    get scoreWickets() {
+        let wickets = 0;
+        for (let index = 0; index < this.#overs.length; index++) {
+            const element = this.#overs[index];
+            wickets += element.wicketCount;
+        }
+        return wickets;
+    }
 
     getPlayerBatFromId(id) {
         for (let index = 0; index < this.#teamBat.length; index++) {
@@ -90,7 +103,7 @@ class OwzatInningsRecord { //==================================================
         this.#overs.push(this.#currentOver);
     }
 
-    ProcessBowl() {
+    processBowl() {
         let result = null;
 
         try {
@@ -107,12 +120,23 @@ class OwzatInningsRecord { //==================================================
             }
         } finally {
             this.#currentBatter = result.nextBatsman;
+            result.over = this.#overs.length;
 
             if (this.#currentOver.ballCount == 6) { this.#newOver(); }
         }
-        //// START DEBUG BIT ////
-        console.log(result);
-        ///// END DEBUG BIT /////
+
         return result;
+    }
+
+    changeBatsman(batsmanId) {
+        let indexNextBatsman = this.#currentBattingPair[0] < this.#currentBattingPair[1] ? this.#currentBattingPair[1] : this.#currentBattingPair[0];
+        indexNextBatsman++;
+
+        let batsmanRecord = this.getPlayerBatFromId(batsmanId);
+        let batsmanNext = this.#teamBat[indexNextBatsman];
+
+        console.log(batsmanRecord, batsmanNext)
+        this.#currentOver.changeBatsman(batsmanRecord, batsmanNext);
+        this.#currentBattingPair[this.#currentBatter] = indexNextBatsman;
     }
 }

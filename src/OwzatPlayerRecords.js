@@ -21,6 +21,7 @@ class OwzatPlayerRecord { //===================================================
 
     get id() { return this.#id; }
     get name() { return this.#surname + " " + this.#forename[0] + "."; }
+    get fullname() { return this.#forename + " " + this.#surname; }
     get surname() { return this.#surname; }
     get forename() { return this.#forename; }
     get nation() { return this.#nation; }
@@ -34,7 +35,7 @@ class OwzatPlayerRecordBatting extends OwzatPlayerRecord { //==================
         super(playerData);
         this.balls = 0;
         this.runs = 0;
-        this.status = '';
+        this.status = 'not out';
     }
 }
 

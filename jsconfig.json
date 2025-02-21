@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "classic",
+        "target": "ES2022",
+        "allowImportingTsExtensions": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true
+    },
+    "include": ["src/**/*", "css/**/*"]
+}

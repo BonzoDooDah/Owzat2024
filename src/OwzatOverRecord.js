@@ -4,16 +4,10 @@ class OwzatOverRecord { //======================================================
     #batsmanOnStrike = 0;
     #balls = null;
 
-    constructor(bowler, batsmen, batsmanOnStrike) { // batsman1, batsman2, batsmanOnStrike) {
-        // set bowler
+    constructor(bowler, batsmen, batsmanOnStrike) {
         this.#bowler = bowler;
-        // create batsman array and set batsmen
-        // this.#batsmen = new Array();
-        // this.#batsmen.push(batsman1);
-        // this.#batsmen.push(batsman2);
         this.#batsmen = batsmen;
         this.#batsmanOnStrike = batsmanOnStrike;
-        // create balls array
         this.#balls = new Array();
     }
 
@@ -21,13 +15,22 @@ class OwzatOverRecord { //======================================================
         return this.#balls.length;
     }
 
-    get runCount() { // returns the total number of runms in the over
+    get runCount() { // returns the total number of runs in the over
         let runs = 0;
         for (let index = 0; index < this.#balls.length; index++) {
             let element = this.#balls[index];
             if (typeof element.score == 'number') { runs += element.score; }
         }
         return runs;
+    }
+
+    get wicketCount() { // returns the total number of runs in the over
+        let wicket = 0;
+        for (let index = 0; index < this.#balls.length; index++) {
+            let element = this.#balls[index];
+            if (element.score == 'W') { wicket++; }
+        }
+        return wicket;
     }
 
     bowlBall() {
@@ -39,7 +42,7 @@ class OwzatOverRecord { //======================================================
 
         // check for end of over error
         if (this.#balls.length == 6) {
-            throw new Error('OZERR106', { cause: { description: 'End of Over. Unable to bowl ball.', } });
+            throw new Error('OZERR106', { cause: { description: 'End of Over. Unable to bowl ball.' } });
         }
 
         // calculate runs scored
@@ -52,16 +55,19 @@ class OwzatOverRecord { //======================================================
             if (batGood) {
                 switch (batResult) {
                     case 5: // owzat
-                        // check for wicket
-                        runs = 'W';
-                        break;
-
-                    case 4: // boundry hit
-                        switch (BfxRandomInt(3)) {
-                            case 2:
+                        switch (BfxRandomInt(2)) {
+                            case 1:
                                 runs = 6;
                                 break;
 
+                            default:
+                                runs = 0;
+                                break;
+                        }
+                        break;
+
+                    case 4: // boundry hit
+                        switch (BfxRandomInt(2)) {
                             case 1:
                                 runs = 4;
                                 break;
@@ -103,6 +109,8 @@ class OwzatOverRecord { //======================================================
             score: runs
         }
         this.#balls.push(ball);
+        ball.ball = this.#balls.length;
+
         //// START DEBUG BIT ////
         // console.log(ball, 'Ball Count: ' + this.ballCount + ', Runs: ' + this.runCount);
         ///// END DEBUG BIT /////
@@ -113,5 +121,15 @@ class OwzatOverRecord { //======================================================
 
         // return ball result
         return ball;
+    }
+
+    changeBatsman(batsmanOut, batsmanIn) {
+        for (let index = 0; index < this.#batsmen.length; index++) {
+            const element = this.#batsmen[index];
+            if (element.id == batsmanOut.id) {
+                this.#batsmen[index] = batsmanIn;
+                return;
+            }
+        }
     }
 }
