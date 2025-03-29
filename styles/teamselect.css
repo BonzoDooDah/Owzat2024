@@ -1,0 +1,24 @@
+section {
+    padding: 10px;
+    text-align: center;
+}
+
+section div {
+    padding: 10px;
+    display: inline-block;
+    width: calc(var(--owzat-width)/2.5);
+}
+
+section div h1 {
+    margin-block: 5px;
+    font-size: 1.5em;
+}
+
+section div select {
+    width: 80%;
+}
+
+section div table {
+    margin: 5px auto;
+    border-collapse: collapse;
+}

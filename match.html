@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/owzat.css">
-    <link rel="stylesheet" href="styles/teamselect.css">
-    <title>Owzat : Team Selection</title>
+    <link rel="stylesheet" href="styles/match.css">
+    <title>Owzat : Match</title>
 </head>
 
 <body onload="initGame()">
@@ -16,17 +16,16 @@
             <div>The cricket match simulator.</div>
         </header>
         <nav>
-            <label for="btnStartMatch">Select home and away teams.</label>
-            <button id="btnStartMatch" type="button" onclick="window.open('match.html','_self')">Start Match</button>
+            <button id="btnBowlBall" type="button" disabled>Bowl Ball</button>
+            <button id="btnBowlOver" type="button" disabled>Bowl Over</button>
+            <button id="btnChangeBowler" type="button" disabled>Change Bowler</button>
         </nav>
         <section>
             <div>
-                <h1>Home Team</h1>
-                <select name="selectTeamHome" id="select-team-home" title="selectTeamHome"></select>
+                <p>Commentary</p>
             </div>
             <div>
-                <h1>Away Team</h1>
-                <select name="selectTeamAway" id="select-team-away" title="selectTeamAway"></select>
+                <p>Scorecard</p>
             </div>
         </section>
     </main>
