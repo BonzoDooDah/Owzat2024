@@ -1,17 +1,17 @@
 section {
-    padding: 10px;
+    margin-block: 10px;
     text-align: center;
 }
 
 section div {
-    padding: 10px;
+    margin-block: 0 5px;
     display: inline-block;
-    width: calc(var(--owzat-width)/2.5);
+    width: calc(var(--owzat-width)/2.1);
 }
 
 section div h1 {
-    margin-block: 5px;
-    font-size: 1.5em;
+    margin-block: 0 5px;
+    font-size: 1.25em;
 }
 
 section div select {

@@ -17,20 +17,28 @@
         </header>
         <nav>
             <label for="btnStartMatch">Select home and away teams.</label>
-            <button id="btnStartMatch" type="button" onclick="window.open('match.html','_self')">Start Match</button>
+            <button id="btnStartMatch" type="button" disabled onclick="startMatch()">Start Match</button>
         </nav>
+        <section>
+            <label for="select-match-type">Select Match Format</label>
+            <select name="select-match-type" id="select-match-type" title="selectMatchType">
+                <option value="TEST">Test Match</option>
+                <option value="ODI">One-Day International</option>
+                <option value="T20">T20</option>
+            </select>
+        </section>
         <section>
             <div>
                 <h1>Home Team</h1>
-                <select name="selectTeamHome" id="select-team-home" title="selectTeamHome"></select>
+                <select name="select-team-home" id="select-team-home" title="selectTeamHome"></select>
             </div>
             <div>
                 <h1>Away Team</h1>
-                <select name="selectTeamAway" id="select-team-away" title="selectTeamAway"></select>
+                <select name="select-team-home" id="select-team-away" title="selectTeamAway"></select>
             </div>
         </section>
     </main>
-    <script src="src/owzat.js"></script>
+    <script src="src/teamselect.js"></script>
 </body>
 
 </html>

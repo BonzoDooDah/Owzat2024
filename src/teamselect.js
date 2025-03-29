@@ -10,6 +10,8 @@ var owzatTeams = null;
 async function initGame() {
     console.log('Initializing game data...');
 
+    localStorage.clear(); // Clear local storage to reset the game state
+
     // Load players and teams data from JSON files
     fetch('./data/players.json')
         .then(response => response.json())
@@ -55,13 +57,13 @@ function initTeamSelection() {
     });
 
     // Set up default selection index and event listeners for team selection dropdowns
-    selectTeamHome.selectedIndex = 0;
+    selectTeamHome.selectedIndex = -1;
     selectTeamHome.onchange = (event) => {
         validateStartMatch();
         if (event.target.parentElement.querySelector('table')) { event.target.parentElement.querySelector('table').remove(); }
         event.target.parentElement.appendChild(createSelectTeamPlayerList(event.target.selectedIndex));
     };
-    selectTeamAway.selectedIndex = 1;
+    selectTeamAway.selectedIndex = -1;
     selectTeamAway.onchange = (event) => {
         validateStartMatch();
         if (event.target.parentElement.querySelector('table')) { event.target.parentElement.querySelector('table').remove(); }
@@ -103,4 +105,34 @@ function createSelectTeamPlayerList(index = -1) {
     });
 
     return elemTeam;
+}
+
+/**
+ * Starts the match by saving the selected teams and their players to local storage.
+ */
+function startMatch() {
+    console.log('Starting match...');
+
+    const teamHomeIndex = document.getElementById('select-team-home').selectedIndex;
+    const teamAwayIndex = document.getElementById('select-team-away').selectedIndex;
+    let teamHome = owzatTeams[teamHomeIndex];
+    teamHome.players = initPlayerArray(teamHome.players);
+    let teamAway = owzatTeams[teamAwayIndex];
+    teamAway.players = initPlayerArray(teamAway.players);
+
+    console.log('Match started with teams:', teamHome.id, 'vs', teamAway.id);
+
+    localStorage.setItem('matchType', document.getElementById('select-match-type').value);
+    localStorage.setItem('teamHome', JSON.stringify(teamHome));
+    localStorage.setItem('teamAway', JSON.stringify(teamAway));
+
+    window.open('match.html','_self');
+}
+
+function initPlayerArray(indexArray) {
+    let playerArray = [];
+    indexArray.forEach(index => {
+        playerArray.push(owzatPlayers[index]);
+    });
+    return playerArray;
 }
