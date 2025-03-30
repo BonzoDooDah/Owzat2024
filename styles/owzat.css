@@ -1,5 +1,5 @@
 :root {
-    --owzat-width: 800px;
+    --owzat-width: 900px;
 }
 
 @font-face {
@@ -74,4 +74,9 @@ nav {
 nav * {
     margin: 5px;
     margin-inline: 10px 0;
+}
+
+nav span {
+    float: right;
+    margin-inline: 10px;
 }

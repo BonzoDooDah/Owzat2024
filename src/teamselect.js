@@ -6,10 +6,13 @@ var owzatTeams = null;
 
 /**
  * Initializes the game data by loading players and teams from JSON files.
+ * This function is called when the page is loaded.
+ * It clears local storage to reset the game state and sets up the team selection UI.
  */
 async function initGame() {
     console.log('Initializing game data...');
 
+    console.log('Clearing local storage...');
     localStorage.clear(); // Clear local storage to reset the game state
 
     // Load players and teams data from JSON files
@@ -17,7 +20,7 @@ async function initGame() {
         .then(response => response.json())
         .then(data => {
             owzatPlayers = data.players;
-            console.log(owzatPlayers.length + ' players loaded.');
+            console.log(owzatPlayers.length + ' players loaded.'); //, owzatPlayers);
         })
         .catch(error => {
             console.error('Error loading JSON:', error);
@@ -26,7 +29,7 @@ async function initGame() {
         .then(response => response.json())
         .then(data => {
             owzatTeams = data.teams;
-            console.log(owzatTeams.length + ' teams loaded.');
+            console.log(owzatTeams.length + ' teams loaded.'); //, owzatTeams);
         })
         .catch(error => {
             console.error('Error loading JSON:', error);
@@ -115,9 +118,9 @@ function startMatch() {
 
     const teamHomeIndex = document.getElementById('select-team-home').selectedIndex;
     const teamAwayIndex = document.getElementById('select-team-away').selectedIndex;
-    let teamHome = owzatTeams[teamHomeIndex];
+    var teamHome = owzatTeams[teamHomeIndex];
     teamHome.players = initPlayerArray(teamHome.players);
-    let teamAway = owzatTeams[teamAwayIndex];
+    var teamAway = owzatTeams[teamAwayIndex];
     teamAway.players = initPlayerArray(teamAway.players);
 
     console.log('Match started with teams:', teamHome.id, 'vs', teamAway.id);
@@ -129,8 +132,14 @@ function startMatch() {
     window.open('match.html','_self');
 }
 
+/**
+ * Initializes the player array for the selected team by mapping the indices to player objects.
+ * 
+ * @param {Array} indexArray - The array of player indices for the selected team.
+ * @returns Array - An array of player objects for the selected team.
+ */
 function initPlayerArray(indexArray) {
-    let playerArray = [];
+    var playerArray = [];
     indexArray.forEach(index => {
         playerArray.push(owzatPlayers[index]);
     });

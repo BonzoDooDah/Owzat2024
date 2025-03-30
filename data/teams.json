@@ -3,6 +3,7 @@
         {
             "name": "England (Ashes 1993)",
             "id": "ENG-ASH93",
+            "matchName": "England",
             "players": [
                 0,
                 1,
@@ -39,6 +40,7 @@
         {
             "name": "Australia (Ashes 1993)",
             "id": "AUS-ASH93",
+            "matchName": "Australia",
             "players": [
                 11,
                 12,

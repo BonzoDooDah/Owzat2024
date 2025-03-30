@@ -16,9 +16,10 @@
             <div>The cricket match simulator.</div>
         </header>
         <nav>
-            <button id="btnBowlBall" type="button" disabled>Bowl Ball</button>
+            <button id="btnBowlBall" type="button" disabled onclick="actionBowlBall()">Bowl Ball</button>
             <button id="btnBowlOver" type="button" disabled>Bowl Over</button>
             <button id="btnChangeBowler" type="button" disabled>Change Bowler</button>
+            <span>Innings</span>
         </nav>
         <section>
             <div>
@@ -31,77 +32,77 @@
                     <thead>
                         <tr>
                             <th>Player</th>
-                            <th>R</th>
-                            <th>B</th>
+                            <th>Ru</th>
+                            <th>Ba</th>
                             <th>S/R</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><div>Player Name</div><div>not out</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0.00</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>not out</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0.00</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0.00</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0.00</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0.00</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0.00</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0.00</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0.00</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0.00</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0.00</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0.00</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                     </tbody>
                 </table>
@@ -110,40 +111,45 @@
                     <thead>
                         <tr>
                             <th>Player</th>
-                            <th>O</th>
-                            <th>R</th>
-                            <th>W</th>
-                            <th>E</th>
+                            <th>Ov</th>
+                            <th>Ru</th>
+                            <th>Wk</th>
+                            <th>Ex</th>
+                            <th>Econ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><div>Player Name</div><div>current bowler</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                         <tr>
-                            <td><div>Player Name</div><div>&nbsp;</div></td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td><div>Player Name</div><div>-</div></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-.-</td>
                         </tr>
                     </tbody>
                 </table>
