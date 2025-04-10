@@ -1,5 +1,10 @@
 :root {
     --owzat-width: 900px;
+    --owzat-forecolour: #ffffff;
+    --owzat-backcolour: #000000;
+    --owzat-highlight: #ffff91;
+    --owzat-disabled: #333333;
+    --owzat-titlecolor: #a1d0ff;
 }
 
 @font-face {
@@ -9,74 +14,135 @@
     font-style: normal;
 }
 
-body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: medium;
-    margin: 0;
+* {
+    font-weight: normal;
 }
 
-select {
+body {
+    font-family: 'markerfield', sans-serif;
+    font-size: x-large;
+    margin: 0;
+    color: var(--owzat-forecolour);
+    background-color: var(--owzat-backcolour);
+    height: 100vh;
+}
+
+select,
+option {
     font-family: inherit;
     font-size: inherit;
+    color: var(--owzat-highlight);
+    background-color: var(--owzat-backcolour);
 }
-
 
 button {
     font-family: inherit;
     font-size: inherit;
-    border-radius: 3px;
-    background-color: rgba(0, 255, 0, 0.25);
-    color: rgb(0, 64, 0);
-    border: 1px solid rgb(0, 64, 0);
+    margin-inline: 10px;
+    padding: 0 20px;
+    border-radius: 30px;
+    border: 1px solid var(--owzat-forecolour);
+    background-color: var(--owzat-forecolour);
+    color: var(--owzat-backcolour);
 }
 
 button:disabled {
-    background-color: #f0f0f0;
-    color: #808080;
-    border: 1px solid #808080;
+    color: var(--owzat-backcolour);
+    border: 1px solid var(--owzat-disabled);
+    background-color: var(--owzat-disabled);
 }
 
 button:hover:not(:disabled) {
-    background-color: rgba(128, 255, 0, 0.75);
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.75);
+    border: 1px solid var(--owzat-highlight);
+    background-color: var(--owzat-highlight);
 }
 
-main {
+button:active:hover:not(:disabled) {
+    background-color: var(--owzat-backcolour);
+    color: var(--owzat-highlight);
+}
+
+h2 {
+    color: var(--owzat-titlecolor);
+}
+
+.match-setup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
     width: var(--owzat-width);
+    height: 100%;
     margin: 0 auto;
 }
 
-header {
-    padding: 0 10px;
+.match-selection-type {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: var(--owzat-width);
+    margin: 10px auto;
 }
 
-header h1 {
-    margin-block: 5px 0;
-    font-family: 'markerfield';
-    font-weight: normal;
-    font-size: 2.5em;
+.match-selection-type label {
+    margin-right: 10px;
 }
 
-header div {
-    margin-top: -1.5em;
-    text-align: right;
-    font-style: italic;
-    color: #808080;
+.match-selection-type select {
+    width: 200px;
 }
 
-nav {
-    border-top: 1px solid #808080;
-    border-bottom: 1px solid #808080;
-    background-color: #f0f0f0;
-    margin-top: 10px;
+.team-selection-container {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-nav * {
-    margin: 5px;
-    margin-inline: 10px 0;
+.team-selection-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 10px;
 }
 
-nav span {
-    float: right;
-    margin-inline: 10px;
+.team-selection-item label {
+    margin-bottom: 5px;
+}
+
+.team-selection-item select {
+    width: 350px;
+}
+
+.team-players-table {
+    border-collapse: collapse;
+    margin: 5px 0;
+}
+
+.team-players-table th,
+.team-players-table td {
+    text-align: center;
+}
+
+.team-players-table th {
+    border-bottom: 1px solid #fff;
+    width: 50px;
+}
+
+.team-players-table th:first-child,
+.team-players-table td:first-child {
+    text-align: left;
+}
+
+.team-players-table th:first-child {
+    width: 200px;
+}
+
+.team-players-table td {
+    color: var(--owzat-highlight);
 }

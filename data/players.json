@@ -3,112 +3,178 @@
         {
             "forename": "Graham",
             "surname": "Gooch",
-            "nation": "ENG"
+            "nation": "ENG",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Mike",
             "surname": "Atherton",
-            "nation": "ENG"
+            "nation": "ENG",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Graeme",
             "surname": "Hick",
-            "nation": "ENG"
+            "nation": "ENG",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Matthew",
             "surname": "Maynard",
-            "nation": "ENG"
+            "nation": "ENG",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Nasser",
             "surname": "Hussain",
-            "nation": "ENG"
+            "nation": "ENG",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Alec",
             "surname": "Stewart",
-            "nation": "ENG"
+            "nation": "ENG",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Mark",
             "surname": "Ramprakash",
-            "nation": "ENG"
+            "nation": "ENG",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Angus",
             "surname": "Fraser",
-            "nation": "ENG"
+            "nation": "ENG",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Steve",
             "surname": "Watkin",
-            "nation": "ENG"
+            "nation": "ENG",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Peter",
             "surname": "Such",
-            "nation": "ENG"
+            "nation": "ENG",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Devon",
             "surname": "Malcolm",
-            "nation": "ENG"
+            "nation": "ENG",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Mark",
             "surname": "Taylor",
-            "nation": "AUS"
+            "nation": "AUS",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Michael",
             "surname": "Slater",
-            "nation": "AUS"
+            "nation": "AUS",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "David",
             "surname": "Boon",
-            "nation": "AUS"
+            "nation": "AUS",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Mark",
             "surname": "Waugh",
-            "nation": "AUS"
+            "nation": "AUS",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Allan",
             "surname": "Border",
-            "nation": "AUS"
+            "nation": "AUS",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Steve",
             "surname": "Waugh",
-            "nation": "AUS"
+            "nation": "AUS",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Ian",
             "surname": "Healy",
-            "nation": "AUS"
+            "nation": "AUS",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Merv",
             "surname": "Hughes",
-            "nation": "AUS"
+            "nation": "AUS",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Paul",
             "surname": "Reiffel",
-            "nation": "AUS"
+            "nation": "AUS",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Shane",
             "surname": "Warne",
-            "nation": "AUS"
+            "nation": "AUS",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         },
         {
             "forename": "Tim",
             "surname": "May",
-            "nation": "AUS"
+            "nation": "AUS",
+            "batSkill": "0",
+            "bowlSkill": "0",
+            "fieldSkill": "0"
         }
     ]
 }
